@@ -1,0 +1,43 @@
+name: Join the ReclaimGuide early-access list
+description: Record interest in the safety-first Windows storage guide
+title: "Early access: "
+labels: ["waitlist"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping validate ReclaimGuide. This is a public issue; do not include private information. No payment is collected.
+  - type: dropdown
+    id: pain
+    attributes:
+      label: What is your main Windows storage problem?
+      options:
+        - I do not know what is using the space
+        - Storage keeps filling up again
+        - I am afraid to delete the wrong files
+        - I need a safe way to reclaim space
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: price
+    attributes:
+      label: Would a clear, approval-gated tool be worth $19.99 once?
+      options:
+        - Yes
+        - Maybe
+        - No
+    validations:
+      required: true
+  - type: textarea
+    id: detail
+    attributes:
+      label: Optional context
+      description: What would make this useful enough to install?
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Validation consent
+      options:
+        - label: I understand this records public validation interest and is not a purchase.
+          required: true
