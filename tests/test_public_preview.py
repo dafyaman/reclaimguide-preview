@@ -23,16 +23,20 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn("$19.99", self.html)
         self.assertIn("Early validation", self.html)
 
-    def test_waitlist_is_a_countable_github_issue_form(self):
-        self.assertIn("https://github.com/dafyaman/reclaimguide-preview/issues/new?template=waitlist.yml", self.html)
+    def test_waitlist_uses_account_free_google_form_on_all_conversion_pages(self):
+        form_url = "https://docs.google.com/forms/d/e/1FAIpQLSdKrVo85XaOiukX-vTF9yFcdGb92oEZhBRwqqOPdLT9HSV5vg/viewform"
+        guide = GUIDE.read_text(encoding="utf-8")
+        planner = PLANNER.read_text(encoding="utf-8")
+        for page in (self.html, guide, planner):
+            self.assertIn(form_url, page)
+            self.assertIn("No Google account required", page)
         self.assertIn("Join the early-access list", self.html)
-        template = (ROOT / ".github" / "ISSUE_TEMPLATE" / "waitlist.yml").read_text(encoding="utf-8")
-        self.assertIn('labels: ["waitlist"]', template)
-        self.assertIn("id: price", template)
-        self.assertIn("id: consent", template)
 
-    def test_waitlist_discloses_github_requirement(self):
-        self.assertIn("GitHub account required", self.html)
+    def test_waitlist_privacy_discloses_google_forms_and_collected_data(self):
+        privacy = PRIVACY.read_text(encoding="utf-8")
+        self.assertIn("Google Forms", privacy)
+        self.assertIn("email address", privacy)
+        self.assertIn("Google’s Privacy Policy", privacy)
 
     def test_compact_desktop_keeps_primary_action_above_fold(self):
         self.assertIn("@media(max-height:700px) and (min-width:781px)", self.html)
@@ -58,7 +62,7 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn("Don’t delete WinSxS manually", guide)
         self.assertIn("support.microsoft.com", guide)
         self.assertIn("learn.microsoft.com", guide)
-        self.assertIn("issues/new?template=waitlist.yml", guide)
+        self.assertIn("docs.google.com/forms/", guide)
         self.assertNotIn("/ResetBase", guide)
         self.assertNotIn("<script src=", guide)
 
