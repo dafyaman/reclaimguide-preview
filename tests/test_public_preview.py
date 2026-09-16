@@ -4,6 +4,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 PRIVACY = ROOT / "privacy.html"
+GUIDE = ROOT / "windows-storage-guide.html"
 ROBOTS = ROOT / "robots.txt"
 SITEMAP = ROOT / "sitemap.xml"
 INDEXNOW_KEY = ROOT / "a85fc997b5115fc41d90d561e830427c.txt"
@@ -45,6 +46,18 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertNotIn('rel="stylesheet"', self.html)
         self.assertTrue(PRIVACY.exists())
 
+    def test_evergreen_storage_guide_is_grounded_and_converts_to_waitlist(self):
+        self.assertTrue(GUIDE.exists())
+        guide = GUIDE.read_text(encoding="utf-8")
+        self.assertIn("How to free up disk space in Windows 11 safely", guide)
+        self.assertIn("Start &gt; Settings &gt; System &gt; Storage", guide)
+        self.assertIn("Don’t delete WinSxS manually", guide)
+        self.assertIn("support.microsoft.com", guide)
+        self.assertIn("learn.microsoft.com", guide)
+        self.assertIn("issues/new?template=waitlist.yml", guide)
+        self.assertNotIn("/ResetBase", guide)
+        self.assertNotIn("<script src=", guide)
+
     def test_search_and_social_metadata_are_complete(self):
         canonical = "https://dafyaman.github.io/reclaimguide-preview/"
         self.assertIn(f'<link rel="canonical" href="{canonical}">', self.html)
@@ -63,6 +76,7 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn("Sitemap: https://dafyaman.github.io/reclaimguide-preview/sitemap.xml", robots)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/privacy.html", sitemap)
+        self.assertIn("https://dafyaman.github.io/reclaimguide-preview/windows-storage-guide.html", sitemap)
         self.assertEqual(INDEXNOW_KEY.read_text(encoding="utf-8").strip(), INDEXNOW_KEY.stem)
 
 
