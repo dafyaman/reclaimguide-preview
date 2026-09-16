@@ -23,6 +23,9 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn("id: price", template)
         self.assertIn("id: consent", template)
 
+    def test_waitlist_discloses_github_requirement(self):
+        self.assertIn("GitHub account required", self.html)
+
     def test_compact_desktop_keeps_primary_action_above_fold(self):
         self.assertIn("@media(max-height:700px) and (min-width:781px)", self.html)
         self.assertIn(".hero{min-height:430px", self.html)
