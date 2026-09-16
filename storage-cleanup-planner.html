@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Build a cautious Windows storage cleanup plan in your browser. No scan, upload, account, or tracking.">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://dafyaman.github.io/reclaimguide-preview/storage-cleanup-planner.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Private Windows storage cleanup planner">
+  <meta property="og:description" content="Estimate a cleanup path without scanning or uploading your files.">
+  <meta property="og:url" content="https://dafyaman.github.io/reclaimguide-preview/storage-cleanup-planner.html">
+  <meta name="twitter:card" content="summary">
+  <title>Private Windows storage cleanup planner — ReclaimGuide</title>
+  <style>
+    :root{--ink:#eef4f8;--muted:#9aa8b6;--line:#26333e;--accent:#79e2bf;--accent-dark:#0f2c25;--orange:#ffad73;--bg:#080b0f;--panel:#10161d;--soft:#151d25;--danger:#ffca80}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 82% -4%,#17332e 0,transparent 30%),var(--bg);color:var(--ink);font:16px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{width:min(1080px,calc(100% - 40px));margin:auto}nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid var(--line)}a{color:var(--accent)}.brand{color:var(--ink);font-weight:850;letter-spacing:-.03em;text-decoration:none}.navlink{text-decoration:none;color:var(--muted);font-weight:700;text-align:right}.navlink:hover{color:var(--ink)}header{padding:38px 0 24px;max-width:760px}.eyebrow{color:var(--accent);font-size:12px;font-weight:850;letter-spacing:.14em;text-transform:uppercase}h1{font-size:clamp(42px,5vw,64px);line-height:.98;letter-spacing:-.055em;margin:10px 0 13px;text-wrap:balance}header p{font-size:17px;color:var(--muted);max-width:690px;margin:0}.privacy-note{display:inline-flex;gap:9px;align-items:center;margin-top:12px;padding:9px 13px;border:1px solid #285246;border-radius:999px;background:var(--accent-dark);color:#bcebdc;font-size:13px;font-weight:750}.privacy-detail{margin-top:8px;color:var(--muted);font-size:12px}.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px #79e2bf1c}.planner{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(310px,.85fr);gap:24px;padding:12px 0 70px;min-width:0}.panel{min-width:0;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,#121a22,#0d1218);box-shadow:0 24px 70px #0005}.form-panel{padding:30px}.result-panel{padding:30px;align-self:start;position:sticky;top:20px}h2{font-size:25px;letter-spacing:-.035em;margin:0 0 7px}.section-copy{margin:0 0 24px;color:var(--muted)}.space-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-bottom:30px}.field,.size,.candidate>div{min-width:0}.field label,.size label{display:block;margin-bottom:8px;color:#c7d2dc;font-size:13px;font-weight:800}.input-shell{display:flex;align-items:center;min-width:0;min-height:48px;border:1px solid #354553;border-radius:12px;background:#0a0f14;transition:border-color 120ms,box-shadow 120ms}.input-shell:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px #79e2bf24}.input-shell input{width:100%;min-width:0;min-height:46px;padding:13px 4px 13px 13px;border:0;outline:0;background:transparent;color:var(--ink);font:700 17px inherit;font-variant-numeric:tabular-nums}.unit{flex:0 0 auto;padding:0 12px 0 7px;color:var(--muted);font-size:13px;font-weight:800}.candidate-list{display:grid;gap:10px}.candidate{display:grid;grid-template-columns:auto minmax(0,1fr) 110px;gap:14px;align-items:center;min-width:0;padding:15px;border:1px solid var(--line);border-radius:15px;background:#0c1218}.candidate:has(input[type="checkbox"]:checked){border-color:#396859;background:#101d1a}.candidate input[type="checkbox"]{width:20px;height:20px;accent-color:var(--accent)}.candidate-title{font-weight:820;letter-spacing:-.015em}.candidate-help{display:block;margin-top:3px;color:var(--muted);font-size:13px;overflow-wrap:anywhere}.risk{display:inline-block;margin-top:7px;color:var(--orange);font-size:10px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}.risk.low{color:var(--accent)}.size .input-shell input{padding-left:10px}.controls{display:flex;gap:10px;margin-top:22px}.button{min-height:48px;padding:12px 18px;border:1px solid transparent;border-radius:12px;background:var(--accent);color:#062019;font:850 14px inherit;cursor:pointer;transition:transform 120ms,background-color 120ms}.button:hover{background:#9aecd1;transform:translateY(-1px)}.button:active{transform:translateY(0)}.button.secondary{background:transparent;border-color:#3a4854;color:var(--ink)}.button.secondary:hover{background:#18212a}.button:focus-visible,.navlink:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #f4c58d;outline-offset:3px}.metric-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:23px 0}.metric{min-width:0;padding:14px 8px;border-radius:12px;background:#080d12;text-align:center}.metric span{display:block;color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.metric strong{display:block;margin-top:6px;font-size:18px;font-variant-numeric:tabular-nums}.verdict{padding:14px 15px;border-radius:12px;font-weight:750}.verdict.success{color:#bdf0df;background:#103126;border:1px solid #285b49}.verdict.pending{color:#ffe0b5;background:#302216;border:1px solid #664529}.checklist{padding-left:20px;color:#c6d1da}.checklist li{margin:9px 0}.guardrail{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}.guardrail strong{color:var(--ink)}.sources{padding:0 0 66px;color:var(--muted);font-size:14px}.sources h2{color:var(--ink)}.sources ul{padding-left:19px}.cta{display:flex;justify-content:space-between;gap:25px;align-items:center;margin:0 0 70px;padding:25px 28px;border:1px solid #315849;border-radius:18px;background:#10221d}.cta h2{margin-bottom:5px}.cta p{margin:0;color:var(--muted)}.cta a{flex:0 0 auto;text-decoration:none}.disclosure{display:block;margin-top:8px;color:var(--muted);font-size:11px;text-align:center}
+    .check-target{display:grid;place-items:center;width:44px;height:44px;cursor:pointer}.candidate input[type="checkbox"]{width:28px;height:28px;min-width:28px;margin:0;cursor:pointer}.candidate:has(input[data-select]){min-height:76px}
+    @media(max-width:820px){.wrap{width:min(100% - 28px,650px)}nav{min-height:62px}header{padding:48px 0 30px}.planner{grid-template-columns:1fr;padding-bottom:50px}.result-panel{position:static}.form-panel,.result-panel{padding:22px}.cta{align-items:stretch;flex-direction:column}.cta .button{text-align:center}}
+    @media(max-width:520px){.wrap{width:calc(100% - 24px)}nav{min-height:58px}.navlink{font-size:13px}header{padding:34px 0 22px}h1{font-size:40px}.space-fields{grid-template-columns:1fr}.candidate{grid-template-columns:auto minmax(0,1fr)}.candidate .size{grid-column:2}.metric-grid{grid-template-columns:1fr}.metric{display:flex;justify-content:space-between;align-items:center;text-align:left}.metric strong{margin:0}.controls{flex-direction:column}.button{width:100%}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
+  </style>
+  <script src="planner.js" defer></script>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a class="brand" href="index.html">ReclaimGuide</a><a class="navlink" href="windows-storage-guide.html">Safe cleanup guide</a></nav>
+    <main>
+      <header>
+        <div class="eyebrow">Free planning tool</div>
+        <h1>Plan without scanning your files.</h1>
+        <p>Set a free-space goal, enter only your own rough estimates, and build a cautious review list before changing anything on your PC.</p>
+        <div class="privacy-note"><span class="dot"></span>Nothing you enter leaves this browser</div>
+        <div class="privacy-detail">The calculation runs on this page with no form submission, browser storage, or analytics. <a href="privacy.html">Privacy details</a></div>
+      </header>
+
+      <div class="planner">
+        <form class="panel form-panel" id="cleanup-planner">
+          <h2>1. Set your goal</h2>
+          <p class="section-copy">Use the numbers shown in Settings → System → Storage. Estimates are enough.</p>
+          <div class="space-fields">
+            <div class="field"><label for="current-free">Free space now</label><div class="input-shell"><input id="current-free" name="currentFree" type="number" min="0" step="0.1" value="12" inputmode="decimal"><span class="unit">GB</span></div></div>
+            <div class="field"><label for="goal-free">Free-space goal</label><div class="input-shell"><input id="goal-free" name="goalFree" type="number" min="0" step="0.1" value="30" inputmode="decimal"><span class="unit">GB</span></div></div>
+          </div>
+
+          <h2>2. Estimate review areas</h2>
+          <p class="section-copy">Select only categories you are willing to inspect. These values are not detected or uploaded.</p>
+          <div class="candidate-list">
+            <div class="candidate" data-candidate data-id="temporary" data-label="Temporary files in Windows Settings" data-risk="low">
+              <label class="check-target" aria-label="Include temporary files"><input data-select type="checkbox"></label>
+              <div><div class="candidate-title">Temporary files</div><span class="candidate-help">Review the categories Windows lists before removing them.</span><span class="risk low">Lower risk · review shown items</span></div>
+              <div class="size"><label for="temporary-size">Estimate</label><div class="input-shell"><input id="temporary-size" data-size type="number" min="0" step="0.1" value="5" inputmode="decimal"><span class="unit">GB</span></div></div>
+            </div>
+            <div class="candidate" data-candidate data-id="recycle" data-label="Recycle Bin" data-risk="low">
+              <label class="check-target" aria-label="Include Recycle Bin"><input data-select type="checkbox"></label>
+              <div><div class="candidate-title">Recycle Bin</div><span class="candidate-help">Open it and confirm you do not need the contents first.</span><span class="risk low">Lower risk · verify first</span></div>
+              <div class="size"><label for="recycle-size">Estimate</label><div class="input-shell"><input id="recycle-size" data-size type="number" min="0" step="0.1" value="2" inputmode="decimal"><span class="unit">GB</span></div></div>
+            </div>
+            <div class="candidate" data-candidate data-id="downloads" data-label="Downloads" data-risk="review">
+              <label class="check-target" aria-label="Include Downloads"><input data-select type="checkbox"></label>
+              <div><div class="candidate-title">Downloads</div><span class="candidate-help">Move or remove individual files only after checking them.</span><span class="risk">Review first · personal files</span></div>
+              <div class="size"><label for="downloads-size">Estimate</label><div class="input-shell"><input id="downloads-size" data-size type="number" min="0" step="0.1" value="8" inputmode="decimal"><span class="unit">GB</span></div></div>
+            </div>
+            <div class="candidate" data-candidate data-id="apps" data-label="Unused apps" data-risk="review">
+              <label class="check-target" aria-label="Include unused apps"><input data-select type="checkbox"></label>
+              <div><div class="candidate-title">Unused apps</div><span class="candidate-help">Uninstall through Windows Settings; do not delete program folders.</span><span class="risk">Review first · may hold data</span></div>
+              <div class="size"><label for="apps-size">Estimate</label><div class="input-shell"><input id="apps-size" data-size type="number" min="0" step="0.1" value="10" inputmode="decimal"><span class="unit">GB</span></div></div>
+            </div>
+            <div class="candidate" data-candidate data-id="personal" data-label="Large personal files to move" data-risk="review">
+              <label class="check-target" aria-label="Include personal files to move"><input data-select type="checkbox"></label>
+              <div><div class="candidate-title">Large files to move</div><span class="candidate-help">Consider moving videos, archives, or installers to another drive.</span><span class="risk">Review first · personal files</span></div>
+              <div class="size"><label for="personal-size">Estimate</label><div class="input-shell"><input id="personal-size" data-size type="number" min="0" step="0.1" value="15" inputmode="decimal"><span class="unit">GB</span></div></div>
+            </div>
+          </div>
+          <div class="controls"><button class="button" type="submit">Build my review plan</button><button class="button secondary" type="reset">Reset estimates</button></div>
+        </form>
+
+        <section class="panel result-panel" id="plan-results" tabindex="-1" aria-live="polite">
+          <div class="eyebrow">Your estimate</div>
+          <h2>Review plan</h2>
+          <p class="section-copy">Potential space is not guaranteed until Windows rechecks the drive.</p>
+          <div class="metric-grid">
+            <div class="metric"><span>Free now</span><strong id="current-output">0 GB</strong></div>
+            <div class="metric"><span>Selected</span><strong id="reclaim-output">0 GB</strong></div>
+            <div class="metric"><span>Projected</span><strong id="projected-output">0 GB</strong></div>
+          </div>
+          <div class="verdict pending" id="plan-verdict"></div>
+          <ol class="checklist" id="plan-checklist"></ol>
+          <div class="guardrail"><strong>Guardrail:</strong> this planner never tells you to manually delete Windows, WinSxS, Program Files, pagefile, or other system-managed folders. Follow the linked Microsoft guidance and keep backups of important files.</div>
+        </section>
+      </div>
+
+      <section class="sources">
+        <h2>Use Windows’ supported tools</h2>
+        <ul>
+          <li><a href="https://support.microsoft.com/en-us/windows/free-up-drive-space-in-windows-85529ccb-c365-490d-b548-831022bc9b32">Microsoft: Free up drive space in Windows</a></li>
+          <li><a href="https://support.microsoft.com/en-us/windows/manage-drive-space-with-storage-sense-654f6ada-7bfc-45e5-966b-e24aded96ad5">Microsoft: Manage drive space with Storage Sense</a></li>
+          <li><a href="windows-storage-guide.html">ReclaimGuide’s cautious walkthrough</a></li>
+        </ul>
+      </section>
+
+      <section class="cta">
+        <div><h2>Want the PC to map this for you?</h2><p>Help validate a one-time $19.99 ReclaimGuide utility with approval-gated recommendations.</p></div>
+        <div><a class="button" href="https://github.com/dafyaman/reclaimguide-preview/issues/new?template=waitlist.yml">Join the early-access list</a><span class="disclosure">No payment · no download · GitHub account required</span></div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

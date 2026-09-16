@@ -1,10 +1,14 @@
 from pathlib import Path
+import json
+import subprocess
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 PRIVACY = ROOT / "privacy.html"
 GUIDE = ROOT / "windows-storage-guide.html"
+PLANNER = ROOT / "storage-cleanup-planner.html"
+PLANNER_JS = ROOT / "planner.js"
 ROBOTS = ROOT / "robots.txt"
 SITEMAP = ROOT / "sitemap.xml"
 INDEXNOW_KEY = ROOT / "a85fc997b5115fc41d90d561e830427c.txt"
@@ -58,6 +62,63 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertNotIn("/ResetBase", guide)
         self.assertNotIn("<script src=", guide)
 
+    def test_private_cleanup_planner_is_linked_and_has_no_network_code(self):
+        self.assertTrue(PLANNER.exists())
+        self.assertTrue(PLANNER_JS.exists())
+        planner = PLANNER.read_text(encoding="utf-8")
+        script = PLANNER_JS.read_text(encoding="utf-8")
+        self.assertIn("Plan without scanning your files", planner)
+        self.assertIn("Nothing you enter leaves this browser", planner)
+        self.assertIn('src="planner.js"', planner)
+        self.assertIn('href="storage-cleanup-planner.html"', self.html)
+        self.assertIn('href="storage-cleanup-planner.html"', GUIDE.read_text(encoding="utf-8"))
+        self.assertIn("storage-cleanup-planner.html", SITEMAP.read_text(encoding="utf-8"))
+        for forbidden in ("fetch(", "xmlhttprequest", "sendbeacon", "websocket", "localstorage"):
+            self.assertNotIn(forbidden, script.lower())
+
+    def test_cleanup_plan_totals_selected_candidates(self):
+        result = self.run_planner({
+            "currentFree": 12,
+            "goalFree": 30,
+            "candidates": [
+                {"id": "temporary", "label": "Temporary files", "gb": 8, "selected": True, "risk": "low"},
+                {"id": "downloads", "label": "Downloads", "gb": 15, "selected": True, "risk": "review"},
+                {"id": "apps", "label": "Unused apps", "gb": 10, "selected": False, "risk": "review"},
+            ],
+        })
+        self.assertEqual(result["selectedTotal"], 23)
+        self.assertEqual(result["projectedFree"], 35)
+        self.assertEqual(result["remainingGap"], 0)
+        self.assertTrue(result["goalMet"])
+
+    def test_cleanup_plan_normalizes_invalid_and_negative_numbers(self):
+        result = self.run_planner({
+            "currentFree": -4,
+            "goalFree": "not-a-number",
+            "candidates": [
+                {"id": "temporary", "label": "Temporary files", "gb": -2, "selected": True, "risk": "low"},
+            ],
+        })
+        self.assertEqual(result["currentFree"], 0)
+        self.assertEqual(result["goalFree"], 0)
+        self.assertEqual(result["selectedTotal"], 0)
+        self.assertTrue(result["goalMet"])
+
+    @staticmethod
+    def run_planner(payload):
+        program = (
+            "const {calculatePlan}=require('./planner.js');"
+            f"console.log(JSON.stringify(calculatePlan({json.dumps(payload)})));"
+        )
+        completed = subprocess.run(
+            ["node", "-e", program],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        return json.loads(completed.stdout)
+
     def test_search_and_social_metadata_are_complete(self):
         canonical = "https://dafyaman.github.io/reclaimguide-preview/"
         self.assertIn(f'<link rel="canonical" href="{canonical}">', self.html)
@@ -77,6 +138,7 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/privacy.html", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/windows-storage-guide.html", sitemap)
+        self.assertIn("https://dafyaman.github.io/reclaimguide-preview/storage-cleanup-planner.html", sitemap)
         self.assertEqual(INDEXNOW_KEY.read_text(encoding="utf-8").strip(), INDEXNOW_KEY.stem)
 
 
