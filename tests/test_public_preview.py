@@ -4,6 +4,9 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 PRIVACY = ROOT / "privacy.html"
+ROBOTS = ROOT / "robots.txt"
+SITEMAP = ROOT / "sitemap.xml"
+INDEXNOW_KEY = ROOT / "a85fc997b5115fc41d90d561e830427c.txt"
 
 
 class PublicPreviewTests(unittest.TestCase):
@@ -39,8 +42,28 @@ class PublicPreviewTests(unittest.TestCase):
     def test_public_page_has_privacy_link_and_no_external_assets(self):
         self.assertIn('href="privacy.html"', self.html)
         self.assertNotIn("<script src=", self.html)
-        self.assertNotIn("<link rel=", self.html)
+        self.assertNotIn('rel="stylesheet"', self.html)
         self.assertTrue(PRIVACY.exists())
+
+    def test_search_and_social_metadata_are_complete(self):
+        canonical = "https://dafyaman.github.io/reclaimguide-preview/"
+        self.assertIn(f'<link rel="canonical" href="{canonical}">', self.html)
+        self.assertIn('<meta property="og:title"', self.html)
+        self.assertIn(f'<meta property="og:url" content="{canonical}">', self.html)
+        self.assertIn('<meta name="twitter:card" content="summary">', self.html)
+        self.assertIn('"@type": "WebSite"', self.html)
+
+    def test_crawlers_have_a_valid_sitemap(self):
+        self.assertTrue(ROBOTS.exists())
+        self.assertTrue(SITEMAP.exists())
+        robots = ROBOTS.read_text(encoding="utf-8")
+        sitemap = SITEMAP.read_text(encoding="utf-8")
+        self.assertIn("User-agent: *", robots)
+        self.assertIn("Allow: /", robots)
+        self.assertIn("Sitemap: https://dafyaman.github.io/reclaimguide-preview/sitemap.xml", robots)
+        self.assertIn("https://dafyaman.github.io/reclaimguide-preview/", sitemap)
+        self.assertIn("https://dafyaman.github.io/reclaimguide-preview/privacy.html", sitemap)
+        self.assertEqual(INDEXNOW_KEY.read_text(encoding="utf-8").strip(), INDEXNOW_KEY.stem)
 
 
 if __name__ == "__main__":
