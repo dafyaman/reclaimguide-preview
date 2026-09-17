@@ -8,6 +8,7 @@ INDEX = ROOT / "index.html"
 PRIVACY = ROOT / "privacy.html"
 GUIDE = ROOT / "windows-storage-guide.html"
 DIAGNOSTIC = ROOT / "c-drive-full-windows-11.html"
+SYSTEM_RESERVED = ROOT / "system-reserved-storage-windows-11.html"
 PLANNER = ROOT / "storage-cleanup-planner.html"
 PLANNER_JS = ROOT / "planner.js"
 ROBOTS = ROOT / "robots.txt"
@@ -88,6 +89,24 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn('href="c-drive-full-windows-11.html"', GUIDE.read_text(encoding="utf-8"))
         self.assertIn("c-drive-full-windows-11.html", SITEMAP.read_text(encoding="utf-8"))
 
+    def test_system_reserved_guide_is_safe_grounded_and_discoverable(self):
+        self.assertTrue(SYSTEM_RESERVED.exists())
+        page = SYSTEM_RESERVED.read_text(encoding="utf-8")
+        self.assertIn("System &amp; reserved storage too large in Windows 11?", page)
+        self.assertIn('"@type": "FAQPage"', page)
+        self.assertIn("Never delete WinSxS manually", page)
+        self.assertIn("Reviewed against current Microsoft", page)
+        self.assertIn("Show more categories &gt; System &amp; reserved", page)
+        self.assertIn("support.microsoft.com", page)
+        self.assertIn("learn.microsoft.com", page)
+        self.assertIn("Share 30-second feedback", page)
+        self.assertIn("No Google account required", page)
+        self.assertNotIn("/ResetBase", page)
+        self.assertNotIn("<script src=", page)
+        self.assertIn('href="system-reserved-storage-windows-11.html"', GUIDE.read_text(encoding="utf-8"))
+        self.assertIn('href="system-reserved-storage-windows-11.html"', DIAGNOSTIC.read_text(encoding="utf-8"))
+        self.assertIn("system-reserved-storage-windows-11.html", SITEMAP.read_text(encoding="utf-8"))
+
     def test_private_cleanup_planner_is_linked_and_has_no_network_code(self):
         self.assertTrue(PLANNER.exists())
         self.assertTrue(PLANNER_JS.exists())
@@ -166,6 +185,7 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/windows-storage-guide.html", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/storage-cleanup-planner.html", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/c-drive-full-windows-11.html", sitemap)
+        self.assertIn("https://dafyaman.github.io/reclaimguide-preview/system-reserved-storage-windows-11.html", sitemap)
         self.assertEqual(INDEXNOW_KEY.read_text(encoding="utf-8").strip(), INDEXNOW_KEY.stem)
 
 
