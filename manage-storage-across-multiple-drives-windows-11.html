@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Manage storage across multiple drives in Windows 11 using built-in storage settings, deliberate headroom, save locations, and safe planning.">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://dafyaman.github.io/reclaimguide-preview/manage-storage-across-multiple-drives-windows-11.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to manage storage across multiple drives in Windows 11">
+  <meta property="og:description" content="A cautious workflow for understanding connected drives, choosing save locations, and planning future storage without risky shortcuts.">
+  <meta property="og:url" content="https://dafyaman.github.io/reclaimguide-preview/manage-storage-across-multiple-drives-windows-11.html">
+  <meta property="og:image" content="https://dafyaman.github.io/reclaimguide-preview/assets/reclaimguide-social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="ReclaimGuide free Windows storage guides and private planner">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://dafyaman.github.io/reclaimguide-preview/assets/reclaimguide-social.png">
+  <title>How to manage storage across multiple drives in Windows 11 | ReclaimGuide</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How can I see storage usage on every drive in Windows 11?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Open Settings, select System, select Storage, then open Advanced storage settings and Storage used on other drives. Choose a drive to see its category breakdown."}
+      },
+      {
+        "@type": "Question",
+        "name": "Can Windows choose where new files and apps are saved?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Windows provides a Where new content is saved screen for choosing default drives for categories such as apps, documents, music, pictures, and videos. Individual desktop installers and game launchers can use their own location settings."}
+      },
+      {
+        "@type": "Question",
+        "name": "Should I combine my drives with Storage Spaces?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Storage Spaces can combine eligible drives into a pool and provide simple, mirror, or parity layouts. It changes storage architecture and should not be treated as a substitute for an independent backup."}
+      },
+      {
+        "@type": "Question",
+        "name": "Does ReclaimGuide automatically scan or move files?",
+        "acceptedAnswer": {"@type": "Answer", "text": "No automatic utility is available. The current public tools are manual and browser-local. A proposed utility would use a local read-only scan across connected drives and require approval before any file change."}
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root{--ink:#ecf3f6;--muted:#9faeba;--line:#283640;--accent:#79e2bf;--orange:#ff9f62;--bg:#080b0f;--panel:#111820;--soft:#151e27;--warn:#2b2117}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 83% -5%,#17352f 0,transparent 30%),var(--bg);color:var(--ink);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{width:min(1080px,calc(100% - 40px));margin:auto}a{color:var(--accent)}nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid var(--line)}.brand{color:var(--ink);font-weight:850;letter-spacing:-.03em;text-decoration:none}.back{color:var(--muted);font-size:14px;text-decoration:none}.back:hover{color:var(--ink)}header{padding:62px 0 44px;max-width:900px}.eyebrow{color:var(--orange);font-size:12px;font-weight:850;letter-spacing:.15em;text-transform:uppercase}h1{font-size:clamp(42px,6.5vw,72px);line-height:.98;letter-spacing:-.06em;margin:13px 0 20px;text-wrap:balance}header>p{max-width:770px;margin:0;color:var(--muted);font-size:19px}.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:19px}.pill{padding:7px 11px;border:1px solid #315247;border-radius:999px;background:#0f211c;color:#bcebdc;font-size:12px;font-weight:800}.layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:34px;border-top:1px solid var(--line);padding:42px 0 72px}.article{min-width:0}.article section{scroll-margin-top:24px;margin-bottom:44px}.article h2{font-size:30px;line-height:1.15;letter-spacing:-.04em;margin:0 0 13px}.article h3{font-size:20px;letter-spacing:-.025em;margin:25px 0 7px}.article p,.article li{color:#c0cbd3}.article ul,.article ol{padding-left:21px}.article li{margin:8px 0}.callout{margin:22px 0;padding:18px 20px;border:1px solid #315247;border-radius:16px;background:#0e1e1a}.callout strong{color:var(--accent)}.warning{border-color:#63472d;background:var(--warn)}.warning strong{color:#ffd2a6}.steps{display:grid;gap:12px;counter-reset:step}.step{position:relative;padding:19px 20px 19px 67px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,#121a22,#0d1218)}.step:before{counter-increment:step;content:counter(step,decimal-leading-zero);position:absolute;left:20px;top:18px;color:var(--orange);font-size:13px;font-weight:900;letter-spacing:.08em}.step h3{margin:0 0 4px}.step p{margin:0}.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}.compare article{padding:19px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}.compare article:last-child{border-color:#315247;background:#0f211c}.compare strong{display:block;margin-bottom:7px}.compare p{margin:0;color:var(--muted);font-size:14px}.toc{align-self:start;position:sticky;top:22px;padding:20px;border:1px solid var(--line);border-radius:16px;background:#0d1319}.toc strong{display:block;margin-bottom:10px}.toc a{display:block;padding:7px 0;color:var(--muted);font-size:13px;text-decoration:none}.toc a:hover{color:var(--accent)}.sources{padding-top:24px;border-top:1px solid var(--line)}.sources li{overflow-wrap:anywhere}.cta{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;margin:0 0 72px;padding:26px 28px;border:1px solid #315247;border-radius:18px;background:#10211c}.cta h2{font-size:27px;letter-spacing:-.04em;margin:0 0 5px}.cta p{margin:0;color:var(--muted)}.button{display:inline-flex;min-height:48px;align-items:center;justify-content:center;padding:12px 18px;border-radius:12px;background:var(--accent);color:#062019;font-weight:900;text-decoration:none}.disclosure{display:block;margin-top:8px;color:var(--muted);font-size:11px;text-align:center}footer{padding:25px 0 38px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    @media(max-width:800px){.wrap{width:min(100% - 28px,680px)}nav{min-height:62px}header{padding:48px 0 34px}header>p{font-size:17px}.layout{grid-template-columns:1fr}.toc{display:none}.compare{grid-template-columns:1fr}.cta{grid-template-columns:1fr}.button{width:100%}.disclosure{text-align:left}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a class="brand" href="index.html">ReclaimGuide</a><a class="back" href="windows-storage-resources.html">All storage resources →</a></nav>
+    <header>
+      <div class="eyebrow">Windows 11 · Multiple drives</div>
+      <h1>How to manage storage across multiple drives in Windows 11</h1>
+      <p>Use Windows’ existing drive views and save-location controls first. Then plan headroom and future installs without pretending that a file category tells you what is safe to delete.</p>
+      <div class="meta"><span class="pill">Reviewed September 2026</span><span class="pill">Microsoft-supported paths</span><span class="pill">No risky folder deletion</span></div>
+    </header>
+
+    <main>
+      <div class="layout">
+        <article class="article">
+          <section id="short-answer">
+            <h2>The short answer</h2>
+            <p>Windows already shows storage usage across connected drives and lets you choose default drives for several kinds of new content. What it does not provide is a single what-if plan for future installs, reserved headroom, and cleanup choices across every drive.</p>
+            <div class="callout"><strong>Start read-only.</strong> Inventory capacity and categories before changing save locations, moving libraries, pooling disks, or deleting files.</div>
+          </section>
+
+          <section id="workflow">
+            <h2>A cautious multi-drive workflow</h2>
+            <div class="steps">
+              <div class="step"><h3>See every connected drive</h3><p>Open <strong>Settings → System → Storage → Advanced storage settings → Storage used on other drives</strong>. Select each drive to review its category breakdown and remaining capacity.</p></div>
+              <div class="step"><h3>Choose your own headroom target</h3><p>Decide how much free capacity you want to preserve on each drive for updates, temporary work, and future installs. Treat it as a planning target—not space Windows has reserved for you.</p></div>
+              <div class="step"><h3>Set sensible defaults</h3><p>Open <strong>Where new content is saved</strong> to choose default drives for new apps, documents, music, pictures, and videos. Check individual desktop installers and game launchers separately because they can maintain their own library locations.</p></div>
+              <div class="step"><h3>Plan the next large install</h3><p>Compare its expected size with usable capacity after your headroom target. Prefer an appropriate drive rather than filling the system drive first and reorganizing later.</p></div>
+              <div class="step"><h3>Review before moving or removing</h3><p>Use supported application controls when moving apps or libraries. For personal files, verify backups and ownership before changing anything. A large file is not automatically disposable.</p></div>
+            </div>
+          </section>
+
+          <section id="spaces">
+            <h2>When Storage Spaces is—and is not—the answer</h2>
+            <p>Microsoft Storage Spaces can group eligible drives into a pool and create virtual drives with simple, mirror, or parity layouts. Microsoft describes simple spaces as performance-oriented without drive-failure protection; mirror and parity layouts add different forms of resiliency.</p>
+            <div class="callout warning"><strong>Storage Spaces is not a backup.</strong> Resiliency can help with certain drive failures, but it does not create an independent copy protected from accidental deletion, malware, account compromise, or every hardware failure.</div>
+            <p>Do not create a pool merely to avoid deciding where files belong. Pooling changes storage architecture and deserves a separate backup and recovery plan.</p>
+          </section>
+
+          <section id="concept">
+            <h2>What a planning tool would need to add</h2>
+            <div class="compare">
+              <article><strong>Available now: this guide</strong><p>Manual Windows steps, safe planning principles, and a browser-local estimate tool. It does not inspect or change your PC.</p></article>
+              <article><strong>Proposed, not available yet</strong><p>A local read-only scan across connected drives, automatic categories, headroom rules, and explained cleanup or placement proposals. Every file change would require approval.</p></article>
+            </div>
+          </section>
+
+          <section id="sources" class="sources">
+            <h2>Primary sources</h2>
+            <ul>
+              <li><a href="https://support.microsoft.com/en-gb/windows/experience/storage-filemanagement/storage-settings-in-windows">Microsoft Support: Storage settings in Windows</a> — other-drive usage, default save locations, disks and volumes, and Storage Spaces.</li>
+              <li><a href="https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/storage-spaces-in-windows">Microsoft Support: Storage Spaces in Windows</a> — requirements, layouts, resiliency, optimization, and drive removal.</li>
+              <li><a href="https://support.microsoft.com/en-us/windows/manage-drive-space-with-storage-sense-654f6ada-7bfc-45e5-966b-e24aded96ad5">Microsoft Support: Manage drive space with Storage Sense</a> — supported automatic cleanup behavior and its system-drive scope.</li>
+            </ul>
+          </section>
+        </article>
+
+        <aside class="toc" aria-label="On this page"><strong>On this page</strong><a href="#short-answer">The short answer</a><a href="#workflow">Five-step workflow</a><a href="#spaces">Storage Spaces</a><a href="#concept">Proposed planning tool</a><a href="#sources">Primary sources</a></aside>
+      </div>
+
+      <section class="cta">
+        <div><h2>Is multi-drive planning your real problem?</h2><p>The feedback form now includes organizing or reserving space across multiple drives as a distinct option.</p></div>
+        <div><a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSdKrVo85XaOiukX-vTF9yFcdGb92oEZhBRwqqOPdLT9HSV5vg/viewform">Share 30-second feedback</a><span class="disclosure">Email optional · no payment · no download · No Google account required</span></div>
+      </section>
+    </main>
+
+    <footer>Independent validation concept. <a href="privacy.html">Privacy</a> · <a href="storage-cleanup-planner.html">Private planner</a> · <a href="windows-storage-resources.html">All resources</a></footer>
+  </div>
+</body>
+</html>

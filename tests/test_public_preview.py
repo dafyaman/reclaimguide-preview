@@ -10,6 +10,7 @@ PRIVACY = ROOT / "privacy.html"
 GUIDE = ROOT / "windows-storage-guide.html"
 DIAGNOSTIC = ROOT / "c-drive-full-windows-11.html"
 SYSTEM_RESERVED = ROOT / "system-reserved-storage-windows-11.html"
+MULTI_DRIVE = ROOT / "manage-storage-across-multiple-drives-windows-11.html"
 RESOURCES = ROOT / "windows-storage-resources.html"
 PLANNER = ROOT / "storage-cleanup-planner.html"
 PLANNER_JS = ROOT / "planner.js"
@@ -45,7 +46,8 @@ class PublicPreviewTests(unittest.TestCase):
         guide = GUIDE.read_text(encoding="utf-8")
         planner = PLANNER.read_text(encoding="utf-8")
         diagnostic = DIAGNOSTIC.read_text(encoding="utf-8")
-        for page in (self.html, guide, planner, diagnostic):
+        multi_drive = MULTI_DRIVE.read_text(encoding="utf-8")
+        for page in (self.html, guide, planner, diagnostic, multi_drive):
             self.assertIn(form_url, page)
             self.assertIn("No Google account required", page)
             self.assertIn("Share 30-second feedback", page)
@@ -132,6 +134,7 @@ class PublicPreviewTests(unittest.TestCase):
             "windows-storage-guide.html",
             "c-drive-full-windows-11.html",
             "system-reserved-storage-windows-11.html",
+            "manage-storage-across-multiple-drives-windows-11.html",
         ):
             self.assertIn(f'href="{target}"', page)
         self.assertIn("Share 30-second feedback", page)
@@ -142,6 +145,23 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertNotIn("google-analytics", page.lower())
         self.assertIn('href="windows-storage-resources.html"', self.html)
         self.assertIn("windows-storage-resources.html", SITEMAP.read_text(encoding="utf-8"))
+
+    def test_multi_drive_guide_is_grounded_safe_and_converts(self):
+        self.assertTrue(MULTI_DRIVE.exists())
+        page = MULTI_DRIVE.read_text(encoding="utf-8")
+        self.assertIn("How to manage storage across multiple drives in Windows 11", page)
+        self.assertIn('"@type": "FAQPage"', page)
+        self.assertIn("Storage used on other drives", page)
+        self.assertIn("Where new content is saved", page)
+        self.assertIn("Storage Spaces is not a backup", page)
+        self.assertIn("support.microsoft.com", page)
+        self.assertIn("Share 30-second feedback", page)
+        self.assertIn("No Google account required", page)
+        self.assertIn("read-only scan across connected drives", page)
+        self.assertIn("not available yet", page)
+        self.assertNotIn("<script src=", page)
+        self.assertIn('href="manage-storage-across-multiple-drives-windows-11.html"', RESOURCES.read_text(encoding="utf-8"))
+        self.assertIn("manage-storage-across-multiple-drives-windows-11.html", SITEMAP.read_text(encoding="utf-8"))
 
     def test_private_cleanup_planner_is_linked_and_has_no_network_code(self):
         self.assertTrue(PLANNER.exists())
@@ -242,7 +262,7 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertEqual(payload[:8], b"\x89PNG\r\n\x1a\n")
         width, height = struct.unpack(">II", payload[16:24])
         self.assertEqual((width, height), (1200, 630))
-        for path in (INDEX, GUIDE, DIAGNOSTIC, SYSTEM_RESERVED, PLANNER, RESOURCES):
+        for path in (INDEX, GUIDE, DIAGNOSTIC, SYSTEM_RESERVED, MULTI_DRIVE, PLANNER, RESOURCES):
             page = path.read_text(encoding="utf-8")
             self.assertIn(f'<meta property="og:image" content="{image_url}">', page)
             self.assertIn('<meta property="og:image:width" content="1200">', page)
@@ -265,6 +285,7 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/c-drive-full-windows-11.html", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/system-reserved-storage-windows-11.html", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/windows-storage-resources.html", sitemap)
+        self.assertIn("https://dafyaman.github.io/reclaimguide-preview/manage-storage-across-multiple-drives-windows-11.html", sitemap)
         self.assertEqual(INDEXNOW_KEY.read_text(encoding="utf-8").strip(), INDEXNOW_KEY.stem)
 
 
