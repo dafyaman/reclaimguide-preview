@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import struct
 import subprocess
 import unittest
 
@@ -16,6 +17,7 @@ ROBOTS = ROOT / "robots.txt"
 SITEMAP = ROOT / "sitemap.xml"
 INDEXNOW_KEY = ROOT / "a85fc997b5115fc41d90d561e830427c.txt"
 README = ROOT / "README.md"
+SOCIAL_IMAGE = ROOT / "assets" / "reclaimguide-social.png"
 
 
 class PublicPreviewTests(unittest.TestCase):
@@ -203,8 +205,22 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn(f'<link rel="canonical" href="{canonical}">', self.html)
         self.assertIn('<meta property="og:title"', self.html)
         self.assertIn(f'<meta property="og:url" content="{canonical}">', self.html)
-        self.assertIn('<meta name="twitter:card" content="summary">', self.html)
+        self.assertIn('<meta name="twitter:card" content="summary_large_image">', self.html)
         self.assertIn('"@type": "WebSite"', self.html)
+
+    def test_conversion_pages_share_a_valid_social_preview_image(self):
+        image_url = "https://dafyaman.github.io/reclaimguide-preview/assets/reclaimguide-social.png"
+        payload = SOCIAL_IMAGE.read_bytes()
+        self.assertEqual(payload[:8], b"\x89PNG\r\n\x1a\n")
+        width, height = struct.unpack(">II", payload[16:24])
+        self.assertEqual((width, height), (1200, 630))
+        for path in (INDEX, GUIDE, DIAGNOSTIC, SYSTEM_RESERVED, PLANNER, RESOURCES):
+            page = path.read_text(encoding="utf-8")
+            self.assertIn(f'<meta property="og:image" content="{image_url}">', page)
+            self.assertIn('<meta property="og:image:width" content="1200">', page)
+            self.assertIn('<meta property="og:image:height" content="630">', page)
+            self.assertIn('<meta name="twitter:card" content="summary_large_image">', page)
+            self.assertIn(f'<meta name="twitter:image" content="{image_url}">', page)
 
     def test_crawlers_have_a_valid_sitemap(self):
         self.assertTrue(ROBOTS.exists())
