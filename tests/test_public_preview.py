@@ -28,15 +28,19 @@ class PublicPreviewTests(unittest.TestCase):
         form_url = "https://docs.google.com/forms/d/e/1FAIpQLSdKrVo85XaOiukX-vTF9yFcdGb92oEZhBRwqqOPdLT9HSV5vg/viewform"
         guide = GUIDE.read_text(encoding="utf-8")
         planner = PLANNER.read_text(encoding="utf-8")
-        for page in (self.html, guide, planner):
+        diagnostic = DIAGNOSTIC.read_text(encoding="utf-8")
+        for page in (self.html, guide, planner, diagnostic):
             self.assertIn(form_url, page)
             self.assertIn("No Google account required", page)
-        self.assertIn("Join the early-access list", self.html)
+            self.assertIn("Share 30-second feedback", page)
+        self.assertIn("Two required questions", self.html)
+        self.assertIn("Example concept preview", self.html)
 
     def test_waitlist_privacy_discloses_google_forms_and_collected_data(self):
         privacy = PRIVACY.read_text(encoding="utf-8")
         self.assertIn("Google Forms", privacy)
         self.assertIn("email address", privacy)
+        self.assertIn("Email is optional", privacy)
         self.assertIn("Google’s Privacy Policy", privacy)
 
     def test_compact_desktop_keeps_primary_action_above_fold(self):
