@@ -23,6 +23,8 @@
     .check-target{display:grid;place-items:center;width:44px;height:44px;cursor:pointer}.candidate input[type="checkbox"]{width:28px;height:28px;min-width:28px;margin:0;cursor:pointer}.candidate:has(input[data-select]){min-height:76px}
     @media(max-width:820px){.wrap{width:min(100% - 28px,650px)}nav{min-height:62px}header{padding:48px 0 30px}.planner{grid-template-columns:1fr;padding-bottom:50px}.result-panel{position:static}.form-panel,.result-panel{padding:22px}.cta{align-items:stretch;flex-direction:column}.cta .button{text-align:center}}
     @media(max-width:520px){.wrap{width:calc(100% - 24px)}nav{min-height:58px}.navlink{font-size:13px}header{padding:34px 0 22px}h1{font-size:40px}.space-fields{grid-template-columns:1fr}.candidate{grid-template-columns:auto minmax(0,1fr)}.candidate .size{grid-column:2}.metric-grid{grid-template-columns:1fr}.metric{display:flex;justify-content:space-between;align-items:center;text-align:left}.metric strong{margin:0}.controls{flex-direction:column}.button{width:100%}}
+    .concept-difference{margin:4px 0 28px;padding:22px;border:1px solid #31404c;border-radius:18px;background:#0d1319}.concept-difference>div:first-child{margin-bottom:16px}.concept-difference h2{margin:4px 0 0}.concept-guardrail{display:inline-flex;margin-top:10px;padding:7px 11px;border:1px solid #315849;border-radius:999px;background:#10201c;color:#bcebdc;font-size:12px;font-weight:800}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:12px}.comparison article{padding:17px;border:1px solid var(--line);border-radius:14px;background:#111920}.comparison article:last-child{border-color:#315849;background:#10201c}.comparison strong{display:block;margin-bottom:6px;color:var(--ink)}.comparison p{margin:0;color:var(--muted);font-size:14px}
+    @media(max-width:700px){.comparison{grid-template-columns:1fr}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
   </style>
   <script src="planner.js" defer></script>
@@ -38,6 +40,14 @@
         <div class="privacy-note"><span class="dot"></span>Nothing you enter leaves this browser</div>
         <div class="privacy-detail">The calculation runs on this page with no form submission, browser storage, or analytics. <a href="privacy.html">Privacy details</a></div>
       </header>
+
+      <section class="concept-difference" aria-labelledby="difference-title">
+        <div><div class="eyebrow">Free demo vs. proposed utility</div><h2 id="difference-title">Manual today. Automatic only if demand is real.</h2><div class="concept-guardrail">Approval before any file change · Not available yet</div></div>
+        <div class="comparison">
+          <article><strong>This free page is manual</strong><p>You enter rough estimates yourself. It does not inspect a PC, decide which personal files are disposable, or represent a finished product.</p></article>
+          <article><strong>Proposed desktop utility</strong><p>A local read-only scan across connected drives would classify storage and explain cleanup or placement proposals. Nothing would move or be deleted without approval. It is a $19.99 hypothesis, not an available download.</p></article>
+        </div>
+      </section>
 
       <div class="planner">
         <form class="panel form-panel" id="cleanup-planner">
