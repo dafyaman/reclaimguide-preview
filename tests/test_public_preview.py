@@ -81,7 +81,9 @@ class PublicPreviewTests(unittest.TestCase):
     def test_evergreen_storage_guide_is_grounded_and_converts_to_waitlist(self):
         self.assertTrue(GUIDE.exists())
         guide = GUIDE.read_text(encoding="utf-8")
-        self.assertIn("How to free up disk space in Windows 11 safely", guide)
+        self.assertIn("Disk cleanup in Windows 11: free up space safely", guide)
+        self.assertIn("Search for Disk Cleanup", guide)
+        self.assertIn("Clean up system files", guide)
         self.assertIn("Start &gt; Settings &gt; System &gt; Storage", guide)
         self.assertIn("Don’t delete WinSxS manually", guide)
         self.assertIn("support.microsoft.com", guide)
@@ -129,6 +131,7 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertTrue(RESOURCES.exists())
         page = RESOURCES.read_text(encoding="utf-8")
         self.assertIn("Windows storage help, without risky shortcuts.", page)
+        self.assertIn("I need a safe Windows 11 disk cleanup sequence", page)
         self.assertIn('"@type": "CollectionPage"', page)
         for target in (
             "storage-cleanup-planner.html",

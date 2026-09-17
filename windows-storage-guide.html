@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A cautious, step-by-step guide to finding what uses disk space and safely freeing storage in Windows 11 using built-in tools.">
+  <meta name="description" content="Disk cleanup in Windows 11 using built-in tools: measure storage, run Disk Cleanup carefully, review recommendations, and avoid risky manual deletion.">
   <meta name="color-scheme" content="dark">
   <link rel="canonical" href="https://dafyaman.github.io/reclaimguide-preview/windows-storage-guide.html">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="How to free up disk space in Windows 11 safely">
-  <meta property="og:description" content="Find large storage categories, review Windows cleanup recommendations, and avoid risky manual deletion.">
+  <meta property="og:title" content="Disk cleanup in Windows 11: free up space safely">
+  <meta property="og:description" content="Measure storage, use Disk Cleanup and Cleanup recommendations deliberately, and avoid risky manual deletion.">
   <meta property="og:url" content="https://dafyaman.github.io/reclaimguide-preview/windows-storage-guide.html">
   <meta property="og:image" content="https://dafyaman.github.io/reclaimguide-preview/assets/reclaimguide-social.png">
   <meta property="og:image:width" content="1200">
@@ -16,17 +16,18 @@
   <meta property="og:image:alt" content="ReclaimGuide free Windows storage guides and private planner">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://dafyaman.github.io/reclaimguide-preview/assets/reclaimguide-social.png">
-  <title>How to free up disk space in Windows 11 safely | ReclaimGuide</title>
+  <title>Disk cleanup in Windows 11: free up space safely | ReclaimGuide</title>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "How to free up disk space in Windows 11 safely",
-    "description": "A cautious workflow using built-in Windows storage tools.",
-    "dateModified": "2026-09-16",
+    "name": "Disk cleanup in Windows 11: free up space safely",
+    "description": "A cautious workflow using Disk Cleanup, Cleanup recommendations, Storage Sense, and other built-in Windows storage tools.",
+    "dateModified": "2026-09-17",
     "publisher": {"@type": "Organization", "name": "ReclaimGuide"},
     "step": [
       {"@type": "HowToStep", "name": "Measure before deleting"},
+      {"@type": "HowToStep", "name": "Use Disk Cleanup deliberately"},
       {"@type": "HowToStep", "name": "Review Cleanup recommendations"},
       {"@type": "HowToStep", "name": "Handle personal files and apps"},
       {"@type": "HowToStep", "name": "Configure Storage Sense deliberately"},
@@ -45,13 +46,13 @@
   <div class="wrap">
     <nav><a class="brand" href="index.html">ReclaimGuide</a><a class="back" href="index.html">← Product preview</a></nav>
     <header>
-      <div class="eyebrow">Safety-first Windows storage guide</div>
-      <h1>How to free up disk space in Windows 11 safely</h1>
-      <p>Start with measurement, use Windows’ built-in recommendations, and review every deletion. This workflow favors reversible decisions over aggressive “cleaner” shortcuts.</p>
-      <div class="meta">Updated September 16, 2026 · About 6 minutes</div>
+      <div class="eyebrow">Windows 11 disk cleanup guide</div>
+      <h1>Disk cleanup in Windows 11: free up space safely</h1>
+      <p>Start with measurement, use Windows’ built-in Disk Cleanup and recommendations, and review every deletion. This workflow favors reversible decisions over aggressive “cleaner” shortcuts.</p>
+      <div class="meta">Updated September 17, 2026 · About 7 minutes</div>
     </header>
     <main class="layout">
-      <aside class="toc" aria-label="On this page"><strong>On this page</strong><a href="#measure">1. Measure first</a><a href="#recommendations">2. Review recommendations</a><a href="#personal">3. Files and apps</a><a href="#sense">4. Storage Sense</a><a href="#avoid">5. What to avoid</a><a href="#checklist">Final checklist</a></aside>
+      <aside class="toc" aria-label="On this page"><strong>On this page</strong><a href="#measure">1. Measure first</a><a href="#disk-cleanup">2. Disk Cleanup</a><a href="#recommendations">3. Recommendations</a><a href="#personal">4. Files and apps</a><a href="#sense">5. Storage Sense</a><a href="#avoid">6. What to avoid</a><a href="#checklist">Final checklist</a></aside>
       <article>
         <h2 id="measure">1. Measure before deleting</h2>
         <p>Open Windows Storage settings. It breaks usage into categories such as Installed apps, Temporary files, and System &amp; reserved, so you can work on the largest meaningful category instead of guessing.<sup><a href="#source-3">[3]</a></sup></p>
@@ -59,7 +60,13 @@
         <p>Record the free-space number before changing anything. If the pressure is on a drive other than C:, open <strong>Advanced storage settings → Storage used on other drives</strong>; Storage Sense itself operates on the system drive.<sup><a href="#source-1">[1]</a></sup></p>
         <div class="note">A large category is not automatically waste. “System &amp; reserved,” for example, includes storage Windows uses for temporary files, caches, and updates.<sup><a href="#source-3">[3]</a></sup></div>
 
-        <h2 id="recommendations">2. Review Cleanup recommendations</h2>
+        <h2 id="disk-cleanup">2. Use Disk Cleanup deliberately</h2>
+        <p>Search for Disk Cleanup from the Windows taskbar, open it, choose the drive you want to review, and select <strong>OK</strong>. Windows calculates file categories that the built-in tool can remove.<sup><a href="#source-2">[2]</a></sup></p>
+        <span class="path">Taskbar search &gt; Disk Cleanup &gt; Choose a drive &gt; OK</span>
+        <p>To review additional system-file categories, select <strong>Clean up system files</strong>, choose the drive again, and wait for the calculation. Read each category before selecting it; rollback or previous-installation files can be valuable if an update causes trouble.<sup><a href="#source-2">[2]</a></sup></p>
+        <div class="note">Disk Cleanup is a supported Windows tool, not permission to select every checkbox. Remove only categories you recognize and no longer need.</div>
+
+        <h2 id="recommendations">3. Review Cleanup recommendations</h2>
         <p>Windows can group candidates into Temporary files, Large or unused files, Files synced to the cloud, and Unused apps. It also estimates the space each selection could save.<sup><a href="#source-2">[2]</a></sup></p>
         <span class="path">Start &gt; Settings &gt; System &gt; Storage &gt; Cleanup recommendations</span>
         <ol>
@@ -70,7 +77,7 @@
         </ol>
         <div class="note warning"><strong>Pause on rollback files.</strong> A previous Windows installation can be useful if you need to return to an earlier version. Delete it only after you are satisfied the current installation is stable and you accept losing that rollback path.</div>
 
-        <h2 id="personal">3. Handle personal files and apps deliberately</h2>
+        <h2 id="personal">4. Handle personal files and apps deliberately</h2>
         <h3>Large personal files</h3>
         <p>Review videos, installers, archives, virtual-machine images, and old project exports. Move files you still need to another trusted drive or backup location rather than deleting them. Microsoft’s guidance recommends sorting files by size to surface the largest candidates.<sup><a href="#source-2">[2]</a></sup></p>
         <h3>Unused applications</h3>
@@ -78,7 +85,7 @@
         <h3>Cloud-synced files</h3>
         <p>Confirm the file is fully synced before changing its local availability. A sync icon is not a substitute for checking that the file opens from the cloud account on another session or device.</p>
 
-        <h2 id="sense">4. Configure Storage Sense deliberately</h2>
+        <h2 id="sense">5. Configure Storage Sense deliberately</h2>
         <p>Storage Sense can remove unnecessary temporary files and aged Recycle Bin contents automatically. With default settings, Downloads and cloud-provider content are not touched unless you configure that behavior.<sup><a href="#source-1">[1]</a></sup></p>
         <span class="path">Start &gt; Settings &gt; System &gt; Storage &gt; Storage Sense</span>
         <ul>
@@ -88,7 +95,7 @@
           <li>Review cloud-content settings before enabling them.</li>
         </ul>
 
-        <h2 id="avoid">5. Avoid risky manual deletion</h2>
+        <h2 id="avoid">6. Avoid risky manual deletion</h2>
         <div class="note warning"><strong>Don’t delete WinSxS manually.</strong> Microsoft explicitly recommends reducing the component store only with Windows’ built-in mechanisms; Windows also performs component cleanup automatically over time.<sup><a href="#source-4">[4]</a></sup></div>
         <p>Avoid deleting unfamiliar content from Windows, Program Files, ProgramData, recovery partitions, or application data folders. If an item is unclear, leave it in place and investigate its owner first. Do not assume a folder’s displayed size equals safely reclaimable space.</p>
 
