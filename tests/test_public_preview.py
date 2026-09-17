@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 PRIVACY = ROOT / "privacy.html"
 GUIDE = ROOT / "windows-storage-guide.html"
+DIAGNOSTIC = ROOT / "c-drive-full-windows-11.html"
 PLANNER = ROOT / "storage-cleanup-planner.html"
 PLANNER_JS = ROOT / "planner.js"
 ROBOTS = ROOT / "robots.txt"
@@ -65,6 +66,21 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn("docs.google.com/forms/", guide)
         self.assertNotIn("/ResetBase", guide)
         self.assertNotIn("<script src=", guide)
+
+    def test_c_drive_diagnostic_is_grounded_discoverable_and_converts(self):
+        self.assertTrue(DIAGNOSTIC.exists())
+        diagnostic = DIAGNOSTIC.read_text(encoding="utf-8")
+        self.assertIn("Why is my C drive full in Windows 11?", diagnostic)
+        self.assertIn('"@type": "FAQPage"', diagnostic)
+        self.assertIn("System &amp; reserved", diagnostic)
+        self.assertIn("support.microsoft.com", diagnostic)
+        self.assertIn("docs.google.com/forms/", diagnostic)
+        self.assertIn("No Google account required", diagnostic)
+        self.assertNotIn("/ResetBase", diagnostic)
+        self.assertNotIn("<script src=", diagnostic)
+        self.assertIn('href="c-drive-full-windows-11.html"', self.html)
+        self.assertIn('href="c-drive-full-windows-11.html"', GUIDE.read_text(encoding="utf-8"))
+        self.assertIn("c-drive-full-windows-11.html", SITEMAP.read_text(encoding="utf-8"))
 
     def test_private_cleanup_planner_is_linked_and_has_no_network_code(self):
         self.assertTrue(PLANNER.exists())
@@ -143,6 +159,7 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/privacy.html", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/windows-storage-guide.html", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/storage-cleanup-planner.html", sitemap)
+        self.assertIn("https://dafyaman.github.io/reclaimguide-preview/c-drive-full-windows-11.html", sitemap)
         self.assertEqual(INDEXNOW_KEY.read_text(encoding="utf-8").strip(), INDEXNOW_KEY.stem)
 
 
