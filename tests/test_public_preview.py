@@ -185,6 +185,29 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertEqual(result["selectedTotal"], 0)
         self.assertTrue(result["goalMet"])
 
+    def test_planner_example_reaches_a_clear_result_without_scanning(self):
+        planner = PLANNER.read_text(encoding="utf-8")
+        self.assertIn('id="load-example"', planner)
+        self.assertIn("Try an example", planner)
+        self.assertIn("Illustrative values, not a scan", planner)
+        program = (
+            "const {calculatePlan,examplePlanInput}=require('./planner.js');"
+            "console.log(JSON.stringify(calculatePlan(examplePlanInput())));"
+        )
+        completed = subprocess.run(
+            ["node", "-e", program],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        result = json.loads(completed.stdout)
+        self.assertEqual(result["currentFree"], 12)
+        self.assertEqual(result["goalFree"], 25)
+        self.assertEqual(result["selectedTotal"], 15)
+        self.assertEqual(result["projectedFree"], 27)
+        self.assertTrue(result["goalMet"])
+
     @staticmethod
     def run_planner(payload):
         program = (

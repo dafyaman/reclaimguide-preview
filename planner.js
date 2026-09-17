@@ -9,6 +9,20 @@ function roundGigabytes(value) {
   return Math.round((value + Number.EPSILON) * 100) / 100;
 }
 
+function examplePlanInput() {
+  return {
+    currentFree: 12,
+    goalFree: 25,
+    candidates: [
+      { id: "temporary", label: "Temporary files in Windows Settings", risk: "low", gb: 5, selected: true },
+      { id: "recycle", label: "Recycle Bin", risk: "low", gb: 2, selected: true },
+      { id: "downloads", label: "Downloads", risk: "review", gb: 8, selected: true },
+      { id: "apps", label: "Unused apps", risk: "review", gb: 10, selected: false },
+      { id: "personal", label: "Large personal files to move", risk: "review", gb: 15, selected: false },
+    ],
+  };
+}
+
 function calculatePlan(input = {}) {
   const currentFree = safeGigabytes(input.currentFree);
   const goalFree = safeGigabytes(input.goalFree);
@@ -39,7 +53,7 @@ function calculatePlan(input = {}) {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { calculatePlan };
+  module.exports = { calculatePlan, examplePlanInput };
 }
 
 if (typeof document !== "undefined") {
@@ -52,6 +66,8 @@ if (typeof document !== "undefined") {
     const projectedOutput = document.querySelector("#projected-output");
     const verdict = document.querySelector("#plan-verdict");
     const checklist = document.querySelector("#plan-checklist");
+    const exampleButton = document.querySelector("#load-example");
+    const resultContext = document.querySelector("#result-context");
 
     const readPlan = () => calculatePlan({
       currentFree: form.elements.currentFree.value,
@@ -95,14 +111,33 @@ if (typeof document !== "undefined") {
       });
     };
 
-    form.addEventListener("input", render);
-    form.addEventListener("change", render);
+    const renderUserPlan = () => {
+      resultContext.textContent = "Your estimate";
+      render();
+    };
+
+    form.addEventListener("input", renderUserPlan);
+    form.addEventListener("change", renderUserPlan);
     form.addEventListener("submit", (event) => {
       event.preventDefault();
+      renderUserPlan();
+      document.querySelector("#plan-results").focus();
+    });
+    exampleButton.addEventListener("click", () => {
+      const example = examplePlanInput();
+      form.elements.currentFree.value = example.currentFree;
+      form.elements.goalFree.value = example.goalFree;
+      const candidatesById = new Map(example.candidates.map((candidate) => [candidate.id, candidate]));
+      form.querySelectorAll("[data-candidate]").forEach((row) => {
+        const candidate = candidatesById.get(row.dataset.id);
+        row.querySelector("[data-select]").checked = Boolean(candidate && candidate.selected);
+        row.querySelector("[data-size]").value = candidate ? candidate.gb : "";
+      });
+      resultContext.textContent = "Illustrative example";
       render();
       document.querySelector("#plan-results").focus();
     });
-    form.addEventListener("reset", () => window.setTimeout(render, 0));
+    form.addEventListener("reset", () => window.setTimeout(renderUserPlan, 0));
     render();
   }
 }
