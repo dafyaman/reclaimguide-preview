@@ -4,6 +4,7 @@ ReclaimGuide is an early validation project for a Windows utility that would exp
 
 ## Try the free resources
 
+- [All Windows storage resources](https://dafyaman.github.io/reclaimguide-preview/windows-storage-resources.html)
 - [Product preview](https://dafyaman.github.io/reclaimguide-preview/)
 - [Private storage cleanup planner](https://dafyaman.github.io/reclaimguide-preview/storage-cleanup-planner.html) — calculations stay in your browser
 - [Safe Windows storage guide](https://dafyaman.github.io/reclaimguide-preview/windows-storage-guide.html)
