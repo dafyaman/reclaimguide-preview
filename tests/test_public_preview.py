@@ -76,6 +76,8 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn("support.microsoft.com", diagnostic)
         self.assertIn("docs.google.com/forms/", diagnostic)
         self.assertIn("No Google account required", diagnostic)
+        self.assertIn('href="#diagnose"', diagnostic)
+        self.assertIn("Start the 5-minute diagnosis", diagnostic)
         self.assertNotIn("/ResetBase", diagnostic)
         self.assertNotIn("<script src=", diagnostic)
         self.assertIn('href="c-drive-full-windows-11.html"', self.html)
