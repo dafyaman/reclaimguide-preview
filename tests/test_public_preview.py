@@ -14,6 +14,7 @@ PLANNER_JS = ROOT / "planner.js"
 ROBOTS = ROOT / "robots.txt"
 SITEMAP = ROOT / "sitemap.xml"
 INDEXNOW_KEY = ROOT / "a85fc997b5115fc41d90d561e830427c.txt"
+README = ROOT / "README.md"
 
 
 class PublicPreviewTests(unittest.TestCase):
@@ -24,6 +25,17 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn("ReclaimGuide", self.html)
         self.assertIn("$19.99", self.html)
         self.assertIn("Early validation", self.html)
+
+    def test_readme_matches_current_public_validation_flow(self):
+        readme = README.read_text(encoding="utf-8")
+        self.assertIn("https://dafyaman.github.io/reclaimguide-preview/", readme)
+        self.assertIn("docs.google.com/forms/", readme)
+        self.assertIn("storage-cleanup-planner.html", readme)
+        self.assertIn("system-reserved-storage-windows-11.html", readme)
+        self.assertIn("$19.99", readme)
+        self.assertIn("Email is optional", readme)
+        self.assertIn("Product source and binaries are not published", readme)
+        self.assertNotIn("repository's public `waitlist` issue form", readme)
 
     def test_waitlist_uses_account_free_google_form_on_all_conversion_pages(self):
         form_url = "https://docs.google.com/forms/d/e/1FAIpQLSdKrVo85XaOiukX-vTF9yFcdGb92oEZhBRwqqOPdLT9HSV5vg/viewform"
