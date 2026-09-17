@@ -251,6 +251,7 @@ class PublicPreviewTests(unittest.TestCase):
     def test_search_and_social_metadata_are_complete(self):
         canonical = "https://dafyaman.github.io/reclaimguide-preview/"
         self.assertIn(f'<link rel="canonical" href="{canonical}">', self.html)
+        self.assertIn('<meta name="google-site-verification" content="NN1EcZMzpcxZ8jLUTJqOLclGGfI9jhAWv80HqWLLD_w">', self.html)
         self.assertIn('<meta property="og:title"', self.html)
         self.assertIn(f'<meta property="og:url" content="{canonical}">', self.html)
         self.assertIn('<meta name="twitter:card" content="summary_large_image">', self.html)
