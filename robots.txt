@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://dafyaman.github.io/reclaimguide-preview/sitemap.xml
+Sitemap: https://dafyaman.github.io/reclaimguide-preview/sitemap.txt

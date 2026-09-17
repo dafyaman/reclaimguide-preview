@@ -16,6 +16,7 @@ PLANNER = ROOT / "storage-cleanup-planner.html"
 PLANNER_JS = ROOT / "planner.js"
 ROBOTS = ROOT / "robots.txt"
 SITEMAP = ROOT / "sitemap.xml"
+TEXT_SITEMAP = ROOT / "sitemap.txt"
 INDEXNOW_KEY = ROOT / "a85fc997b5115fc41d90d561e830427c.txt"
 README = ROOT / "README.md"
 SOCIAL_IMAGE = ROOT / "assets" / "reclaimguide-social.png"
@@ -274,11 +275,14 @@ class PublicPreviewTests(unittest.TestCase):
     def test_crawlers_have_a_valid_sitemap(self):
         self.assertTrue(ROBOTS.exists())
         self.assertTrue(SITEMAP.exists())
+        self.assertTrue(TEXT_SITEMAP.exists())
         robots = ROBOTS.read_text(encoding="utf-8")
         sitemap = SITEMAP.read_text(encoding="utf-8")
+        text_sitemap = TEXT_SITEMAP.read_text(encoding="utf-8")
         self.assertIn("User-agent: *", robots)
         self.assertIn("Allow: /", robots)
         self.assertIn("Sitemap: https://dafyaman.github.io/reclaimguide-preview/sitemap.xml", robots)
+        self.assertIn("Sitemap: https://dafyaman.github.io/reclaimguide-preview/sitemap.txt", robots)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/privacy.html", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/windows-storage-guide.html", sitemap)
@@ -287,6 +291,9 @@ class PublicPreviewTests(unittest.TestCase):
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/system-reserved-storage-windows-11.html", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/windows-storage-resources.html", sitemap)
         self.assertIn("https://dafyaman.github.io/reclaimguide-preview/manage-storage-across-multiple-drives-windows-11.html", sitemap)
+        self.assertIn("https://dafyaman.github.io/reclaimguide-preview/", text_sitemap)
+        self.assertIn("https://dafyaman.github.io/reclaimguide-preview/manage-storage-across-multiple-drives-windows-11.html", text_sitemap)
+        self.assertEqual(len([line for line in text_sitemap.splitlines() if line]), 8)
         self.assertEqual(INDEXNOW_KEY.read_text(encoding="utf-8").strip(), INDEXNOW_KEY.stem)
 
 
